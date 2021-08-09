@@ -1,0 +1,42 @@
+name: courses_example_project
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.0
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  json_annotation:
+  flutter_bloc: ^7.0.1
+  get_it:
+  cached_network_image: ^3.1.0
+  google_maps_flutter: ^2.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: 
+  json_serializable:
+  hive_generator: ^1.1.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope/Manrope-Regular.ttf
+        - asset: assets/fonts/Manrope/Manrope-Light.ttf
+        - asset: assets/fonts/Manrope/Manrope-ExtraLight.ttf
+        - asset: assets/fonts/Manrope/Manrope-Bold.ttf
+        - asset: assets/fonts/Manrope/Manrope-SemiBold.ttf
+        - asset: assets/fonts/Manrope/Manrope-ExtraBold.ttf
