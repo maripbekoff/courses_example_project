@@ -8,7 +8,6 @@ import 'package:courses_example_project/src/constants/padding_const.dart';
 import 'package:courses_example_project/src/routes/routing_const.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/log_in_bloc.dart';

@@ -3,7 +3,6 @@ import 'package:courses_example_project/src/common/widgets/search_bar_widget.dar
 import 'package:courses_example_project/src/constants/color_const.dart';
 import 'package:courses_example_project/src/constants/padding_const.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

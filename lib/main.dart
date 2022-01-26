@@ -6,7 +6,6 @@ import 'package:courses_example_project/src/constants/theme.dart';
 import 'package:courses_example_project/src/routes/router.dart';
 import 'package:courses_example_project/src/routes/routing_const.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

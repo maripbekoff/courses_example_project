@@ -59,7 +59,7 @@ class AuthorizationServiceImpl implements AuthorizationService {
   }) async {
     try {
       Response response = await dio.post(
-        'login/refresh',
+        'registration/customer/new',
         data: {
           'email': email,
           'nickname': nickname,
