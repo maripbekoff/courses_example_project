@@ -5,7 +5,9 @@ import 'package:courses_example_project/src/constants/border_radius_const.dart';
 import 'package:courses_example_project/src/constants/color_const.dart';
 import 'package:courses_example_project/src/constants/padding_const.dart';
 import 'package:courses_example_project/src/routes/routing_const.dart';
+import 'package:courses_example_project/src/screens/home/cubits/favourites/favourites_cubit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({
@@ -99,7 +101,10 @@ class RestaurantCard extends StatelessWidget {
                             CupertinoIcons.heart,
                             color: AppColors.red,
                           ),
-                    onPressed: () {},
+                    onPressed: () =>
+                        context.read<FavouritesCubit>().addFavourite(
+                              rest.id,
+                            ),
                   ),
                 ],
               ),

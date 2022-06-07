@@ -22,6 +22,7 @@ class DioInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    print(tokensBox.get('access'));
     if (!options.uri.path.contains('auth'))
       options.headers['Authorization'] = 'Bearer ${tokensBox.get('access')}';
     super.onRequest(options, handler);

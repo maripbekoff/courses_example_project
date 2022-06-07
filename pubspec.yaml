@@ -16,7 +16,7 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   json_annotation:
-  flutter_bloc: ^7.0.1
+  flutter_bloc: ^8.0.1
   get_it:
   cached_network_image: ^3.1.0
   google_maps_flutter: ^2.0.6

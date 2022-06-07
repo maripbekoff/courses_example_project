@@ -1,6 +1,8 @@
+import 'package:courses_example_project/src/common/dependencies/injection_container.dart';
 import 'package:courses_example_project/src/common/widgets/restaurant_card.dart';
 import 'package:courses_example_project/src/common/widgets/search_bar_widget.dart';
 import 'package:courses_example_project/src/constants/padding_const.dart';
+import 'package:courses_example_project/src/screens/home/cubits/favourites/favourites_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,8 +38,13 @@ class HomeScreen extends StatelessWidget {
                       separatorBuilder: (context, index) =>
                           SizedBox(height: 20),
                       itemBuilder: (context, index) {
-                        return RestaurantCard(
-                          rest: state.rests[index],
+                        return BlocProvider(
+                          create: (context) => FavouritesCubit(
+                            favouritesService: getIt(),
+                          ),
+                          child: RestaurantCard(
+                            rest: state.rests[index],
+                          ),
                         );
                       },
                     );

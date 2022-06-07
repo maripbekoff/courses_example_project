@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:courses_example_project/src/common/models/remote/auth_model.dart';
 import 'package:courses_example_project/src/common/models/remote/user_model.dart';
@@ -19,14 +17,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc({
     required this.authorizationService,
-  }) : super(RegisterInitial());
-
-  @override
-  Stream<RegisterState> mapEventToState(
-    RegisterEvent event,
-  ) async* {
-    if (event is Register) {
-      yield RegisterLoading();
+  }) : super(RegisterInitial()) {
+    on<Register>((event, emit) async {
+      emit(RegisterLoading());
 
       try {
         AuthModel authModel = await authorizationService.register(
@@ -40,14 +33,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         tokensBox.put('refresh', authModel.tokens.refresh);
         userBox.put('user', authModel.user);
 
-        yield RegisterLoaded();
+        emit(RegisterLoaded());
       } on DioError catch (e) {
-        yield RegisterFailed(message: 'Произошла ошибка');
+        emit(RegisterFailed(message: 'Произошла ошибка'));
         throw e;
       } catch (e) {
-        yield RegisterFailed(message: 'Произошла ошибка');
+        emit(RegisterFailed(message: 'Произошла ошибка'));
         throw e;
       }
-    }
+    });
   }
 }

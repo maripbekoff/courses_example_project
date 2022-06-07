@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:courses_example_project/src/common/models/remote/restaurant_model.dart';
 import 'package:courses_example_project/src/services/restaurants/restaurant_service.dart';
@@ -14,24 +12,21 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   MapBloc({
     required this.restaurantService,
-  }) : super(MapInitial());
-
-  @override
-  Stream<MapState> mapEventToState(
-    MapEvent event,
-  ) async* {
-    yield MapLoading();
-    try {
-      List<RestaurantModel> rests = await restaurantService.getRestaurants(
-        limit: 100,
-      );
-      yield MapLoaded(rests: rests);
-    } on DioError catch (e) {
-      yield MapFailed();
-      throw e;
-    } catch (e) {
-      yield MapFailed();
-      throw e;
-    }
+  }) : super(MapInitial()) {
+    on<InitMap>((event, emit) async {
+      emit(MapLoading());
+      try {
+        List<RestaurantModel> rests = await restaurantService.getRestaurants(
+          limit: 100,
+        );
+        emit(MapLoaded(rests: rests));
+      } on DioError catch (e) {
+        emit(MapFailed());
+        throw e;
+      } catch (e) {
+        emit(MapFailed());
+        throw e;
+      }
+    });
   }
 }

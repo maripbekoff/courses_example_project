@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:courses_example_project/src/common/models/remote/restaurant_model.dart';
 import 'package:courses_example_project/src/services/favourites/favourites_service.dart';
@@ -14,24 +12,19 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
   FavouritesBloc({
     required this.favouriteService,
-  }) : super(FavouritesInitial());
-
-  @override
-  Stream<FavouritesState> mapEventToState(
-    FavouritesEvent event,
-  ) async* {
-    if (event is InitFavourites) {
-      yield FavouritesLoading();
+  }) : super(FavouritesInitial()) {
+    on<InitFavourites>((event, emit) async {
+      emit(FavouritesLoading());
       try {
         List<RestaurantModel> rests = await favouriteService.getFavourites();
-        yield FavouritesLoaded(rests: rests);
+        emit(FavouritesLoaded(rests: rests));
       } on DioError catch (e) {
-        yield FavouritesFailed();
+        emit(FavouritesFailed());
         throw e;
       } catch (e) {
-        yield FavouritesFailed();
+        emit(FavouritesFailed());
         throw e;
       }
-    }
+    });
   }
 }

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    // Задаём прозрачный цвет системному статус бару 
+    // Задаём прозрачный цвет системному статус бару
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Color(0xFF),

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:courses_example_project/src/common/models/remote/restaurant_model.dart';
 import 'package:courses_example_project/src/services/restaurants/restaurant_service.dart';
@@ -15,26 +13,21 @@ class RestaurantDetailBloc
 
   RestaurantDetailBloc({
     required this.restaurantService,
-  }) : super(RestaurantDetailInitial());
-
-  @override
-  Stream<RestaurantDetailState> mapEventToState(
-    RestaurantDetailEvent event,
-  ) async* {
-    if (event is InitRestaurantDetail) {
-      yield RestaurantDetailLoading();
+  }) : super(RestaurantDetailInitial()) {
+    on<InitRestaurantDetail>((event, emit) async {
+      emit(RestaurantDetailLoading());
       try {
         RestaurantModel rest = await restaurantService.getRestaurant(
           id: event.id,
         );
-        yield RestaurantDetailLoaded(rest: rest);
+        emit(RestaurantDetailLoaded(rest: rest));
       } on DioError catch (e) {
-        yield RestaurantDetailFailed();
+        emit(RestaurantDetailFailed());
         throw e;
       } catch (e) {
-        yield RestaurantDetailFailed();
+        emit(RestaurantDetailFailed());
         throw e;
       }
-    }
+    });
   }
 }

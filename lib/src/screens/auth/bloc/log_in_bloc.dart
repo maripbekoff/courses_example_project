@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:courses_example_project/src/common/models/remote/auth_model.dart';
 import 'package:courses_example_project/src/common/models/remote/user_model.dart';
@@ -19,14 +17,9 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
 
   LogInBloc({
     required this.authorizationService,
-  }) : super(LogInInitial());
-
-  @override
-  Stream<LogInState> mapEventToState(
-    LogInEvent event,
-  ) async* {
-    if (event is LogInPressed) {
-      yield LogInLoading();
+  }) : super(LogInInitial()) {
+    on<LogInPressed>((event, emit) async {
+      emit(LogInLoading());
 
       try {
         AuthModel authModel = await authorizationService.logIn(
@@ -38,14 +31,14 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         tokensBox.put('refresh', authModel.tokens.refresh);
         userBox.put('user', authModel.user);
 
-        yield LogInLoaded();
+        emit(LogInLoaded());
       } on DioError catch (e) {
-        yield LogInFailed(message: 'Неправильный логин или пароль');
+        emit(LogInFailed(message: 'Неправильный логин или пароль'));
         throw e;
       } catch (e) {
-        yield LogInFailed(message: 'Произошла ошибка');
+        emit(LogInFailed(message: 'Произошла ошибка'));
         throw e;
       }
-    }
+    });
   }
 }
